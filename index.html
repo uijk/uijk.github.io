@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>leaf</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.0/github-markdown.min.css">
+
+	<style type="text/css">
+	#show{
+		width: 800px;
+		margin: 50px auto;
+	}
+	</style>
+
+	<meta comment="This is online version, dist fetch from cdn">
+
+</head>
+
+<body>
+
+
+<div class="container" id="show">
+	<div id="about" class="markdown-body"></div>
+</div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+function readTextFile(file)
+{
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", file, false);
+	rawFile.onreadystatechange = function ()
+	{
+		if(rawFile.readyState === 4)
+		{
+			if(rawFile.status === 200 || rawFile.status == 0)
+			{
+				var allText = rawFile.responseText;
+				//below is showdown work
+				var converter = new showdown.Converter(),
+				text      = allText,
+				html      = converter.makeHtml(text);
+				document.getElementById('about').innerHTML=html;
+			}
+		}
+	}
+	rawFile.send(null);
+}
+readTextFile("README.md");
+</script>
+
+</html>
